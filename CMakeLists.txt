@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(RSA source/main.cpp
         include/RSA.h
-        source/RSA.cpp)
+        source/RSA.cpp
+        include/HashFunction.h
+        source/HashFunction.cpp)
