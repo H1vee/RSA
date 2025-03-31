@@ -7,4 +7,6 @@ add_executable(RSA source/main.cpp
         include/RSA.h
         source/RSA.cpp
         include/HashFunction.h
-        source/HashFunction.cpp)
+        source/HashFunction.cpp
+        include/DigitalSignature.h
+        source/DigitalSignature.cpp)
