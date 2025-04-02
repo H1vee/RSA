@@ -1,19 +1,45 @@
 #include <iostream>
+#include<stdexcept>
+#include "../include/Signer.h"
+#include "../include/DigitalSignature.h"
+#include "../include/Verifier.h"
+#include "../include/RSA.h"
+#include "../include/HashFunction.h"
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the
-    // <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+int main(int argc, char *argv[]) {
+    if (argc<3) {
+        std::cout << "Usage: " << std::endl;
+        std::cout << "  For signing: " << argv[0] << " -s input_file output_file" << std::endl;
+        std::cout << "  For verification: " << argv[0] << " -v file_with_signature" << std::endl;
+        return 1;
+    }
+    std::string mode = argv[1];
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code.
-        // We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/>
-        // breakpoint for you, but you can always add more by pressing
-        // <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    try {
+        RSA rsa(3,11,7);
+
+        HashFunction hash(33);
+
+        DigitalSignature ds(rsa,hash);
+
+        if (mode == "-s" && argc>=4) {
+            Signer signer(ds);
+            signer.signFile(argv[2],argv[3]);
+        }else if (mode == "-v" && argc>=3) {
+            Verifier verifier(ds);
+            verifier.verifyFile(argv[2]);
+        }else {
+            std::cout << "Invalid arguments." << std::endl;
+            std::cout << "Usage: " << std::endl;
+            std::cout << "  For signing: " << argv[0] << " -s input_file output_file" << std::endl;
+            std::cout << "  For verification: " << argv[0] << " -v file_with_signature" << std::endl;
+            return 1;
+        }
+    }catch(const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
     }
 
     return 0;

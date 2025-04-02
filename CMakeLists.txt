@@ -3,14 +3,15 @@ project(RSA)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(RSA source/main.cpp
-        include/RSA.h
+include_directories(include)
+
+set(SOURCES
         source/RSA.cpp
-        include/HashFunction.h
         source/HashFunction.cpp
-        include/DigitalSignature.h
         source/DigitalSignature.cpp
-        include/FileHandler.h
         source/FileHandler.cpp
-        include/Signer.h
-        source/Signer.cpp)
+        source/Signer.cpp
+        source/Verifier.cpp
+        source/main.cpp
+)
+add_executable(RSA ${SOURCES})

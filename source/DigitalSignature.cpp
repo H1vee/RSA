@@ -5,12 +5,12 @@
 DigitalSignature::DigitalSignature(const RSA& rsa_system, const HashFunction& hash_function)
     :rsa(rsa_system), hash(hash_function){}
 
-int DigitalSignature::sign(const std::string& &message) const {
+int DigitalSignature::sign(const std::string& message) const {
     int hash_value = hash.calculate(message);
     return rsa.encrypt(hash_value);
 }
 
-bool DigitalSignature::verify(const std::string& &message, int signature) const {
+bool DigitalSignature::verify(const std::string& message, int signature) const {
     int hash_value = hash.calculate(message);
     int decrypted_signature = rsa.decrypt(signature);
 

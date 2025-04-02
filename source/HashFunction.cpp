@@ -9,9 +9,10 @@ HashFunction::HashFunction(int mod):modulus(mod){
 }
 
 void HashFunction::initializeUkrainianAlphabet() {
-  std::vector<char> ukrAlphabet = {
-    'А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й', 'К', 'Л', 'М',
-    'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ю', 'Я'
+  std::vector<wchar_t> ukrAlphabet = {
+    L'А', L'Б', L'В', L'Г', L'Ґ', L'Д', L'Е', L'Є', L'Ж', L'З', L'И', L'І', L'Ї', L'Й', L'К',
+    L'Л', L'М', L'Н', L'О', L'П', L'Р', L'С', L'Т', L'У', L'Ф', L'Х', L'Ц', L'Ч', L'Ш', L'Щ',
+    L'Ь', L'Ю', L'Я'
 };
 
   for (size_t i = 0; i < ukrAlphabet.size(); i++) {
@@ -19,7 +20,7 @@ void HashFunction::initializeUkrainianAlphabet() {
     charMap[std::tolower(ukrAlphabet[i])] = i;
   }
 
-  charMap[' '] = 32;
+  charMap[L' '] = 32;
 }
 
 int HashFunction::calculate(const std::string &message) const {
