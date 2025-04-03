@@ -36,7 +36,7 @@ int RSA::powerMod(int base, int exponent, int mod) {
   long long  b = base % mod;
 
   while (exponent > 0) {
-    if (exponent % 2==0) {
+    if (exponent % 2==1) {
       result = (result*b) % mod;
     }
     exponent = exponent >> 1;

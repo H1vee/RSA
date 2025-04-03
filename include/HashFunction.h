@@ -13,7 +13,7 @@ private:
   std::unordered_map<char,int> charMap;
   int modulus;
 
-  void initializeUkrainianAlphabet();
+  void initializeEnglishAlphabet();
 
   public:
 
